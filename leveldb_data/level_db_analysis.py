@@ -28,6 +28,7 @@ if __name__ == '__main__':
             mean = sum(values) / len(values)
             variance = sum([((x - mean) ** 2) for x in values]) / len(values)
             res = variance ** 0.5
+            print("Mean of sample is : " + str(mean))
             print("Standard deviation of sample is : " + str(res))
             current_leveldb.close()
             break
