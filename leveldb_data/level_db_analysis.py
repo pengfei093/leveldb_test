@@ -10,13 +10,13 @@ def create_leveldb(leveldb_address, create_if_missing):
 
 
 def hist_level_db_size(current_leveldb):
-    counter = 1
+    values = []
     for key, value in current_leveldb:
-        print(key)
-        print(value)
-        counter += 1
-        if counter > 10:
-            break
+        values.append(value)
+        mean = sum(values) / len(values)
+        variance = sum([((x - mean) ** 2) for x in values]) / len(values)
+        res = variance ** 0.5
+        print("Standard deviation of sample is : " + str(res))
 
 
 if __name__ == '__main__':
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     db_path = 'localstorage'
     files_paths_list = os.listdir(db_path)
     for file_path in files_paths_list:
-        if file_path.endswith('_data'):
+        if file_path.endswith('_data') or file_path.endswith('_data'):
             leveldb_address = db_path + '/' + file_path
             current_leveldb = create_leveldb(leveldb_address, False)
             hist_level_db_size(current_leveldb)
