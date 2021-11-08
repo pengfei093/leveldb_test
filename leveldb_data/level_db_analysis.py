@@ -10,10 +10,13 @@ def create_leveldb(leveldb_address, create_if_missing):
 
 
 def hist_level_db_size(current_leveldb):
+    counter = 1
     for key, value in current_leveldb:
         print(key)
         print(value)
-        break
+        counter += 1
+        if counter < 10:
+            break
 
 
 if __name__ == '__main__':
