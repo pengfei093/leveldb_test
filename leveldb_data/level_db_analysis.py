@@ -3,6 +3,8 @@ import signal
 
 import plyvel
 
+values = []
+
 
 def create_leveldb(leveldb_address, create_if_missing):
     db = plyvel.DB(leveldb_address, create_if_missing=False)
@@ -10,13 +12,8 @@ def create_leveldb(leveldb_address, create_if_missing):
 
 
 def hist_level_db_size(current_leveldb):
-    values = []
     for key, value in current_leveldb:
         values.append(value)
-        mean = sum(values) / len(values)
-        variance = sum([((x - mean) ** 2) for x in values]) / len(values)
-        res = variance ** 0.5
-        print("Standard deviation of sample is : " + str(res))
 
 
 if __name__ == '__main__':
@@ -28,5 +25,9 @@ if __name__ == '__main__':
             leveldb_address = db_path + '/' + file_path
             current_leveldb = create_leveldb(leveldb_address, False)
             hist_level_db_size(current_leveldb)
+            mean = sum(values) / len(values)
+            variance = sum([((x - mean) ** 2) for x in values]) / len(values)
+            res = variance ** 0.5
+            print("Standard deviation of sample is : " + str(res))
             current_leveldb.close()
             break
