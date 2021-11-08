@@ -13,7 +13,7 @@ def create_leveldb(leveldb_address, create_if_missing):
 
 def hist_level_db_size(current_leveldb):
     for key, value in current_leveldb:
-        values.append(value)
+        values.append(len(value))
 
 
 if __name__ == '__main__':
