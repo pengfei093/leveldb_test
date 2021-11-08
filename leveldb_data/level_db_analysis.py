@@ -31,4 +31,3 @@ if __name__ == '__main__':
             print("Mean of sample is : " + str(mean))
             print("Standard deviation of sample is : " + str(res))
             current_leveldb.close()
-            break
